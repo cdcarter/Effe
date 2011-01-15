@@ -42,8 +42,14 @@ class Effe
 	def chart_bodies
 		if @chart_bodies.empty?
 			Bodies.each_with_index do |body,idx|
-				return if idx == 23 or idx == 24
-				result = self.body(idx)
+				if idx == 23
+					idxr = 10
+				elsif idx == 24
+					idxr = 11
+				else
+					idxr = idx
+				end
+				result = self.body(idxr)
 				degree = result[0]
 				retrograde = !!(result[3] < 0)
 				
@@ -63,6 +69,19 @@ class Effe
 					end
 				end
 			end
+			
+			old_deg = -1000
+			dist = 0
+			@chart_bodies.each {|body|
+				deg = body[:degree_ut] - chart_ascmcs[0][:degree_ut] + 180
+				if (old_deg-deg).abs < 5
+					dist = dist+1
+				else
+					dist = 0
+				end
+				body[:dist] = dist
+				old_deg = deg
+			}
 		end
 		return @chart_bodies
 	end
