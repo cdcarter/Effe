@@ -1,4 +1,7 @@
 require 'ext/sweph4ruby'
+$:.unshift(File.dirname(__FILE__))
+require 'effe/bodies'
+
 class Effe
 	S = Sweph.new
 	ROOT = File.dirname(File.expand_path(__FILE__)) + '/../'
@@ -11,6 +14,10 @@ class Effe
 	end
 	
 	def julian
-		S.swe_julday(time.year,time.month,time.day,(time.hour + (time.min/60.0)))
+		@julian ||= S.swe_julday(time.year,time.month,time.day,(time.hour + (time.min/60.0)))
+	end
+	
+	def body(body)
+		S.swe_calc_ut(julian,body)
 	end
 end
