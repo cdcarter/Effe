@@ -1,0 +1,8 @@
+Author::    Pedro Moreira Santos  (mailto:pedro.santos@bizarrologia.com)
+Copyright:: Copyright (c) 2005 Pedro Moreira Santos
+License::   MIT
+
+
+sweph4ruby provides a ruby interface for the SWISS EPHEMERIS [http://www.astro.com/swisseph/] a library for the computation of planetary positions implemented in C.
+
+Swiss Ephemeris is a compression of the JPL-Ephemeris DE406 that can be found here [http://www.jpl.nasa.gov], more information about SWISS EPHEMERIS can be found in the user manual [http://www.astro.com/swisseph/swisseph.htm?lang=f].
