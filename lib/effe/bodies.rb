@@ -1,4 +1,18 @@
 class Effe
+	Bodies = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", 
+	"Uranus", "Neptune", "Pluto", "MeanNode", "TrueNode", "MeanApogee", 
+	"OscuApogee", "Earth", "Chiron", "Pholus", "Ceres", "Pallas", "Juno", "Vesta", 
+	"InterpretedApogee", "InterpretedPerigee", "MeanSouthNode", "TrueSouthNode"]
+	Houses = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", 
+	"XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", 
+	"XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", 
+	"XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI"]
+	Ascendants = ["Ascendant", "MC", "ARMC", "Vertex", "EquatorialAscendant", 
+	"Co-Ascendant1", "Co-Ascendant2", "PolarAscendant", "NASCMC"]
+	Signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", 
+	"Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
+	
+	
 	ECL_NUT     = 			-1     
 	SUN         =       0      
 	MOON        =       1      

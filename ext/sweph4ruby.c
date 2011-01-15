@@ -12,6 +12,11 @@ static VALUE t_swe_set_ephe_path(VALUE self, VALUE path)
 	return self;
 }
 
+static VALUE t_swe_set_topo(VALUE self, VALUE lon, VALUE lat, VALUE alt) {
+	swe_set_topo(NUM2DBL(lon),NUM2DBL(lat),NUM2DBL(alt));
+	return self;
+}
+
 static VALUE t_swe_julday(VALUE self, VALUE year, VALUE month, VALUE day, VALUE hour)
 {
 	double julday = swe_julday( NUM2INT(year), NUM2INT(month), NUM2INT(day), NUM2DBL(hour), SE_GREG_CAL );
@@ -121,5 +126,6 @@ void Init_sweph4ruby()
 	
 	//cdcarter methods
 	rb_define_method(cSweph, "swe_calc_ut", t_swe_calc_ut, 2);
+	rb_define_method(cSweph, "swe_set_topo", t_swe_set_topo, 3);
 	
 }
