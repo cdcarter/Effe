@@ -35,8 +35,8 @@ class Effe
 		@houses ||= @s.swe_houses(julian,lat,long,sys)[1..12]
 	end
 	
-	def ascmc(sys="P")
-		@ascmc ||= @s.swe_houses(julian,lat,long,sys)[13..20]
+	def ascmcs(sys="P")
+		@ascmcs ||= @s.swe_houses(julian,lat,long,sys)[13..20]
 	end
 	
 	def chart_bodies
@@ -87,6 +87,28 @@ class Effe
 			end
 		end
 		return @chart_houses
+	end
+	
+	def chart_ascmcs
+		if @chart_ascmcs.empty?
+			self.ascmcs.each_with_index do |degree_ut,idx|
+				Signs.each_with_index do |sign,sidx|
+					deg_low = (sidx * 30).to_f
+					deg_high = ((sidx+1) * 30).to_f
+					if (degree_ut >= deg_low and degree_ut <= deg_high)
+						@chart_ascmcs << {
+							:id => idx+1,
+							:name => Ascendants[idx],
+							:sign => sign,
+							:sign_id => sidx,
+							:degree => degree_ut - deg_low,
+							:degree_ut => degree_ut
+						}
+					end
+				end
+			end
+		end
+		return @chart_ascmcs
 	end
 	
 	private
