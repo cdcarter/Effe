@@ -59,7 +59,7 @@ class Effe
 					if (degree >= deg_low and degree <= deg_high)
 						@chart_bodies << {
 						  :id => idx,
-							:body => body,
+							:name => body,
 							:sign => sign,
 							:sign_id => sidx,
 							:degree => degree - deg_low,
@@ -128,6 +128,44 @@ class Effe
 			end
 		end
 		return @chart_ascmcs
+	end
+	
+	def test_aspect(body1, body2, deg1, deg2, delta, orb, type)
+		if ((deg1 > (deg2 + delta - orb) and deg1 < (deg2 + delta + orb)) or 
+		    (deg1 > (deg2 - delta - orb) and deg1 < (deg2 - delta + orb)) or
+		    (deg1 > (deg2 + 360 + delta - orb) and deg1 < (deg2 + 360 + delta + orb)) or 
+		    (deg1 > (deg2 - 360 + delta - orb) and deg1 < (deg2 - 360 + delta + orb)) or 
+		    (deg1 > (deg2 + 360 - delta - orb) and deg1 < (deg2 + 360 - delta + orb)) or  
+		    (deg1 > (deg2 - 360 - delta - orb) and deg1 < (deg2 - 360 - delta + orb)))
+					if (deg1 > deg2)
+						@chart_aspects << {
+							:name => type,
+							:body1 => body1[:name],
+							:body2 => body2[:name],
+							:degree1 => deg1,
+							:degree2 => deg2
+						}
+					end
+		end
+	end
+	
+	def chart_aspects
+		if @chart_aspects.empty?
+			self.chart_bodies.each do |body1|
+				deg1 = body1[:degree_ut] - self.chart_ascmcs[0][:degree_ut] + 180
+				self.chart_bodies.each do |body2|
+					deg2 = body2[:degree_ut] - self.chart_ascmcs[0][:degree_ut] + 180
+					test_aspect(body1, body2, deg1, deg2, 180, 10, "Opposition")
+					test_aspect(body1, body2, deg1, deg2, 150,  2, "Quincunx")
+					test_aspect(body1, body2, deg1, deg2, 120,  8, "Trine")
+					test_aspect(body1, body2, deg1, deg2,  90,  6, "Square")
+					test_aspect(body1, body2, deg1, deg2,  60,  4, "Sextile")
+					test_aspect(body1, body2, deg1, deg2,  30,  1, "Semi-sextile")
+					test_aspect(body1, body2, deg1, deg2,   0, 10, "Conjunction")
+				end
+			end
+		end
+		return @chart_aspects
 	end
 	
 	private
